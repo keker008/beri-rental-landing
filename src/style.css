@@ -424,6 +424,10 @@ em {
   transform: translateY(-5px);
   box-shadow: 0 18px 40px #181c171c;
 }
+.catalog-card.selected-card {
+  outline: 3px solid var(--orange);
+  outline-offset: -3px;
+}
 .card-meta {
   display: flex;
   justify-content: space-between;
@@ -749,6 +753,31 @@ em {
 .request-form .form-field:focus {
   box-shadow: none;
   border-color: var(--orange);
+}
+.selected-summary {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  background: #f7d8cb;
+  font-size: 13px;
+}
+.price-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.saved-requests {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.saved-requests p {
+  margin: 8px 0 0;
+  color: var(--muted);
 }
 .date-grid {
   display: grid;

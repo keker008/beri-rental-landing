@@ -147,7 +147,10 @@
               v-for="(item, index) in filteredItems"
               :key="item.id"
               class="catalog-card"
-              :class="item.color"
+              :class="[
+                item.color,
+                { 'selected-card': form.item === item.name },
+              ]"
             >
               <div class="card-meta">
                 <span>0{{ index + 1 }} / {{ item.category }}</span
@@ -169,7 +172,7 @@
                     :aria-label="'Выбрать ' + item.name"
                     @click="chooseItem(item)"
                   >
-                    Выбрать ↗
+                    {{ form.item === item.name ? "Выбрано ✓" : "Выбрать ↗" }}
                   </button>
                 </div>
               </div>
@@ -306,6 +309,10 @@
                 {{ item.name }}
               </option>
             </select>
+            <p v-if="selectedItem" class="selected-summary">
+              Выбрано: <strong>{{ selectedItem.name }}</strong> ·
+              {{ formatPrice(selectedItem.price) }} за сутки
+            </p>
             <div class="date-grid">
               <div>
                 <label class="form-label" for="start">Начало</label
@@ -330,13 +337,30 @@
                 />
               </div>
             </div>
+            <p v-if="estimatedTotal" class="price-summary">
+              <span
+                >{{ rentalDays }}
+                {{ rentalDays === 1 ? "день" : "дн." }} проката</span
+              >
+              <strong>{{ formatPrice(estimatedTotal) }}</strong>
+            </p>
             <p v-if="formError" class="form-error" role="alert">
               {{ formError }}
             </p>
             <button class="action-button" type="submit">
-              Показать заявку <span>↗</span>
+              Сохранить подбор <span>↗</span>
             </button>
-            <p class="form-note">Данные не отправляются на сервер.</p>
+            <p class="form-note">
+              Подбор сохраняется только в этом браузере и не отправляется в
+              прокат.
+            </p>
+            <div v-if="savedRequests.length" class="saved-requests">
+              <strong>Сохраненные подборы</strong>
+              <p v-for="request in savedRequests.slice(0, 3)" :key="request.id">
+                {{ request.item }} · {{ formatDate(request.start) }} —
+                {{ formatDate(request.end) }} · {{ formatPrice(request.total) }}
+              </p>
+            </div>
           </form>
         </div>
       </section>
@@ -396,8 +420,8 @@
           ×</button
         ><span class="result-icon">✓</span>
         <p class="eyebrow">Заявка</p>
-        <h2 id="modal-title">Всё заполнено.</h2>
-        <p>Так выглядела бы ваша заявка на прокат:</p>
+        <h2 id="modal-title">Подбор сохранен.</h2>
+        <p>Вещь и даты сохранены в этом браузере:</p>
         <dl>
           <div>
             <dt>Имя</dt>
@@ -415,8 +439,14 @@
             <dt>Даты</dt>
             <dd>{{ formatDate(form.start) }} — {{ formatDate(form.end) }}</dd>
           </div>
+          <div>
+            <dt>Стоимость</dt>
+            <dd>{{ formatPrice(estimatedTotal) }}</dd>
+          </div>
         </dl>
-        <p class="form-note">Заявка не отправлена.</p>
+        <p class="form-note">
+          Это предварительный расчет, а не подтвержденная аренда.
+        </p>
         <button class="action-button" type="button" @click="showResult = false">
           Понятно <span>↗</span>
         </button>
@@ -509,12 +539,13 @@ export default {
         {
           question: "Заявка действительно отправляется?",
           answer:
-            "Нет. Заполненная заявка показывается только в вашем браузере.",
+            "Нет. Выбранная вещь и даты сохраняются в вашем браузере. Для реального бронирования нужен прием заявок сервисом проката.",
         },
       ],
       form: { name: "", phone: "", item: "", start: "", end: "" },
       formError: "",
       showResult: false,
+      savedRequests: JSON.parse(localStorage.getItem("beri_requests") || "[]"),
       today: new Date().toLocaleDateString("en-CA"),
     };
   },
@@ -523,6 +554,23 @@ export default {
       return this.selectedCategory === "Все"
         ? this.items
         : this.items.filter((item) => item.category === this.selectedCategory);
+    },
+    selectedItem() {
+      return this.items.find((item) => item.name === this.form.item);
+    },
+    rentalDays() {
+      if (!this.form.start || !this.form.end || this.form.end < this.form.start)
+        return 0;
+      return (
+        Math.round(
+          (Date.parse(this.form.end) - Date.parse(this.form.start)) / 86400000,
+        ) + 1
+      );
+    },
+    estimatedTotal() {
+      return this.selectedItem && this.rentalDays
+        ? this.selectedItem.price * this.rentalDays
+        : 0;
     },
   },
   methods: {
@@ -550,10 +598,24 @@ export default {
     },
     submitRequest() {
       this.formError = "";
+      if (!this.selectedItem) {
+        this.formError = "Выберите вещь в каталоге или форме.";
+        return;
+      }
       if (this.form.end < this.form.start) {
         this.formError = "Дата окончания не может быть раньше даты начала.";
         return;
       }
+      const request = {
+        id: Date.now(),
+        item: this.form.item,
+        start: this.form.start,
+        end: this.form.end,
+        days: this.rentalDays,
+        total: this.estimatedTotal,
+      };
+      this.savedRequests.unshift(request);
+      localStorage.setItem("beri_requests", JSON.stringify(this.savedRequests));
       this.showResult = true;
     },
     formatDate(value) {
