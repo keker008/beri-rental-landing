@@ -12,6 +12,13 @@
       </div>
 
       <p
+        v-if="browserDemo"
+        class="mb-5 rounded-lg bg-amber-100 p-3 text-sm text-amber-900"
+      >
+        Демо-режим: данные хранятся только в этом браузере на этом устройстве.
+      </p>
+
+      <p
         v-if="message"
         class="mb-5 rounded-lg bg-green-100 p-3 text-sm text-brand"
         role="status"
@@ -393,11 +400,14 @@
 </template>
 
 <script>
+import { demoApi } from "../demoApi.js";
+
 export default {
   emits: ["close"],
   data() {
     return {
       token: localStorage.getItem("beri_token") || "",
+      browserDemo: location.hostname.endsWith("github.io"),
       user: null,
       authTab: "login",
       currentTab: "items",
@@ -455,6 +465,9 @@ export default {
   },
   methods: {
     async api(url, options = {}) {
+      if (this.browserDemo) {
+        return demoApi(url, this.token, options);
+      }
       const response = await fetch("/api/v1" + url, {
         ...options,
         headers: { Authorization: "Bearer " + this.token, ...options.headers },

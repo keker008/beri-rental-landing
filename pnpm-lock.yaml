@@ -17,6 +17,9 @@ importers:
       multer:
         specifier: ^2.5.0
         version: 2.5.0
+      read-excel-file:
+        specifier: ^9.3.17
+        version: 9.3.17
       vue:
         specifier: ^3.5.0
         version: 3.5.45
@@ -769,6 +772,9 @@ packages:
       picomatch:
         optional: true
 
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
+
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
@@ -1166,6 +1172,9 @@ packages:
     resolution: {integrity: sha512-NMPBRMJgiQHjbd8phG3Vebdx4kZ1H121rbl5IkMqeOsahptB9BKo/d7oJ3zTXqTgagn2bWlNSXkh0QUGM31RYg==}
     engines: {node: '>=18'}
 
+  node-int64@0.4.0:
+    resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
+
   node-releases@2.0.64:
     resolution: {integrity: sha512-zAPCKqMcnqs2nGy6nlkm7JduFseiBJy3EXHGLh+8pFR+TxGCBxxiEN21+UROU5CKwX/f4TlUcYjiM+vs/tsyxw==}
     engines: {node: '>=18'}
@@ -1318,6 +1327,10 @@ packages:
   read-cache@1.0.2:
     resolution: {integrity: sha512-/peqiBB/n07gQGLsWaHho3WfvUyRscw0gYTsEFMhrIe/nWLkYaf5SbKYjGYqtRV3aPwykJgF2VEMo1ac4bnsGA==}
 
+  read-excel-file@9.3.17:
+    resolution: {integrity: sha512-szsrzmxWxNZ1OuXKGBVHbNMmNfTkRmNJZRuBRAQxMh9eTLnhSNXqM6JVUds9in59dMgujBe2gT0kMVb0T8NlSQ==}
+    engines: {node: '>=18'}
+
   readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
 
@@ -1386,6 +1399,10 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  saxen@11.2.0:
+    resolution: {integrity: sha512-2bG564AAJcm/3vyZC0Uhs/mACrH+4AHMaKHKAB2M5xMqomUZa27FQ7MYaQGFKVcJk/MVzSEQ34A8QZWW+eiWEw==}
+    engines: {node: '>= 20.12'}
 
   saxes@5.0.1:
     resolution: {integrity: sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==}
@@ -1551,6 +1568,10 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
+  unzipper-esm@0.13.3:
+    resolution: {integrity: sha512-LUO6VZ6fCzkDbdMev0/fOhoIeVGKaOkTIOoYxVLE0SQjfvmAHK+oywl7lfhloSZIsdGJ25mJ18Mtd9CyTASjrA==}
+    engines: {node: '>=8.0.0'}
+
   unzipper@0.10.14:
     resolution: {integrity: sha512-ti4wZj+0bQTiX2KmKWuwj7lhV+2n//uXEotUmGuQqrbVZSEGFMbI68+c6JCQ8aAmUWYvtHEz2A8K6wXvueR/6g==}
 
@@ -1635,6 +1656,10 @@ packages:
   which-typed-array@1.1.24:
     resolution: {integrity: sha512-wk4Mf4pR5mRP7eYuuTBCIQ9d0ud2Fv2jRLQpfgnRjbOxAFHmjKFValgTpitVKzJJS8ajnYQV2Du1SZ8j6b/EUQ==}
     engines: {node: '>= 0.4'}
+
+  worker-f@0.1.24:
+    resolution: {integrity: sha512-XzBi/8IctnwWeg50HX9klvRosALIqfxByQRyPQ6mHjGBGOFPm8jhHJKYFlwYovifzeBV+TAi9M5tJX4ZHw3G+A==}
+    engines: {node: '>=12'}
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
@@ -2411,6 +2436,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.7
 
+  fflate@0.8.3: {}
+
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -2805,6 +2832,8 @@ snapshots:
     dependencies:
       content-type: 2.1.0
 
+  node-int64@0.4.0: {}
+
   node-releases@2.0.64: {}
 
   normalize-path@3.0.0: {}
@@ -2923,6 +2952,13 @@ snapshots:
       unpipe: 1.0.0
 
   read-cache@1.0.2: {}
+
+  read-excel-file@9.3.17:
+    dependencies:
+      fflate: 0.8.3
+      saxen: 11.2.0
+      unzipper-esm: 0.13.3
+      worker-f: 0.1.24
 
   readable-stream@2.3.8:
     dependencies:
@@ -3051,6 +3087,8 @@ snapshots:
       is-regex: 1.2.1
 
   safer-buffer@2.1.2: {}
+
+  saxen@11.2.0: {}
 
   saxes@5.0.1:
     dependencies:
@@ -3320,6 +3358,11 @@ snapshots:
 
   unpipe@1.0.0: {}
 
+  unzipper-esm@0.13.3:
+    dependencies:
+      graceful-fs: 4.2.12
+      node-int64: 0.4.0
+
   unzipper@0.10.14:
     dependencies:
       big-integer: 1.6.52
@@ -3405,6 +3448,8 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       has-tostringtag: 1.0.2
+
+  worker-f@0.1.24: {}
 
   wrappy@1.0.2: {}
 
