@@ -15,7 +15,8 @@
     "express": "^5.3.0",
     "multer": "^2.5.0",
     "read-excel-file": "^9.3.17",
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "write-excel-file": "^4.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",

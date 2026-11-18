@@ -133,9 +133,14 @@
         >
           <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
             <h3 class="text-xl font-bold">Таблица вещей</h3>
-            <button class="btn-primary" type="button" @click="openEditor()">
-              Добавить вещь
-            </button>
+            <div class="flex flex-wrap gap-2">
+              <button class="btn-outline" type="button" @click="exportItems">
+                Скачать Excel
+              </button>
+              <button class="btn-primary" type="button" @click="openEditor()">
+                Добавить вещь
+              </button>
+            </div>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full border-collapse text-left text-sm">
@@ -216,6 +221,13 @@
           class="rounded-2xl bg-white p-5 shadow-sm"
         >
           <h3 class="mb-3 text-xl font-bold">Загрузка Excel</h3>
+          <button
+            class="btn-outline mb-4"
+            type="button"
+            @click="downloadTemplate"
+          >
+            Скачать образец .xlsx
+          </button>
           <p class="mb-4 text-sm text-stone-600">
             Первый лист: название, категория, цена за день. Первая строка —
             заголовки.
@@ -464,6 +476,46 @@ export default {
     }
   },
   methods: {
+    async saveExcel(rows, filename) {
+      const { default: writeExcelFile } =
+        await import("write-excel-file/browser");
+      await writeExcelFile(rows).toFile(filename);
+    },
+    async downloadTemplate() {
+      try {
+        await this.saveExcel(
+          [
+            ["Название", "Категория", "Цена за день"],
+            ["Палатка", "Отдых", 20],
+          ],
+          "obrazec-veshchey.xlsx",
+        );
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
+    async exportItems() {
+      try {
+        const rows = [["Название", "Категория", "Цена за день"]];
+        let page = 1;
+        let total = 0;
+        do {
+          const result = await this.api("/items?page=" + page + "&limit=50");
+          total = result.total;
+          rows.push(
+            ...result.items.map((item) => [
+              item.name,
+              item.category,
+              item.price,
+            ]),
+          );
+          page++;
+        } while (rows.length - 1 < total);
+        await this.saveExcel(rows, "veshchi-beri.xlsx");
+      } catch (error) {
+        this.error = error.message;
+      }
+    },
     async api(url, options = {}) {
       if (this.browserDemo) {
         return demoApi(url, this.token, options);
