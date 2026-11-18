@@ -521,11 +521,6 @@ em {
   padding: 38px 0;
   background: #e9e5da;
 }
-.ad-section aside {
-  border-color: #aaa99f;
-  background: transparent;
-  color: #75776e;
-}
 .how-section {
   background: var(--ink);
   color: var(--paper);

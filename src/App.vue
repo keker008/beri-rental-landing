@@ -162,8 +162,8 @@
                   <p>{{ item.description }}</p>
                 </div>
                 <div class="card-bottom">
-                  <strong>{{ formatPrice(item.price) }}</strong
-                  ><span>/ сутки</span
+                  <strong>{{ formatPrice(item.price) }}</strong><span
+                    >/ сутки</span
                   ><button
                     type="button"
                     :aria-label="'Выбрать ' + item.name"
@@ -372,7 +372,6 @@
             <a href="#catalog">Каталог</a><a href="#how">Как это работает</a
             ><a href="#request">Заявка</a>
           </nav>
-          <span>Сделано для новых планов.</span>
         </div>
       </div>
     </footer>
