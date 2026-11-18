@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .DS_Store
+storage/
+report_pages/
+*.pdf
 *.docx
 ad-slot-screenshot.png
 vendor/

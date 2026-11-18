@@ -9,21 +9,21 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps({
-  size: { type: String, default: 'banner' },
-  width: { type: String, default: '' },
-  height: { type: String, default: '' }
+  size: { type: String, default: "banner" },
+  width: { type: String, default: "" },
+  height: { type: String, default: "" },
 });
 
 const sizes = {
-  banner: { width: '100%', height: '120px' },
-  sidebar: { width: '300px', height: '250px' }
+  banner: { width: "100%", height: "120px" },
+  sidebar: { width: "300px", height: "250px" },
 };
 
 const slotStyle = computed(() => ({
   width: props.width || (sizes[props.size] || sizes.banner).width,
-  height: props.height || (sizes[props.size] || sizes.banner).height
+  height: props.height || (sizes[props.size] || sizes.banner).height,
 }));
 </script>
