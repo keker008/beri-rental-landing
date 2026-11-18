@@ -3,6 +3,7 @@ dist/
 .DS_Store
 storage/
 report_pages/
+redesign-*.png
 *.pdf
 *.docx
 ad-slot-screenshot.png
